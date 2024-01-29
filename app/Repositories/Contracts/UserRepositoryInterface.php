@@ -8,7 +8,7 @@ interface UserRepositoryInterface
 {
     public function getAll();
     public function getById(string $id): User;
-    public function create(array $data): User;
+    public function store(array $data): User;
     public function update(string $id, array $data): User;
-    public function delete(string $id);
+    public function destroy(string $id);
 }

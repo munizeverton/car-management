@@ -17,7 +17,7 @@ class UserRepository implements UserRepositoryInterface
         return User::findOrFail($id);
     }
 
-    public function create(array $data): User
+    public function store(array $data): User
     {
         return User::create($data);
     }
@@ -27,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
         return User::findOrFail($id)->update($data);
     }
 
-    public function delete(string $id)
+    public function destroy(string $id)
     {
         User::findOrFail($id)->delete();
     }

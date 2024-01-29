@@ -14,18 +14,25 @@ class UserService
         $this->repository = $repository;
     }
 
-    public function create(array $data)
+    public function store(string $name, string $email, string $password)
     {
-        return $this->repository->create($data);
+        return $this->repository->store([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password
+        ]);
     }
 
-    public function update(string $id, array $data)
+    public function update(string $id, string $email, string $password)
     {
-        return $this->repository->update($id, $data);
+        return $this->repository->update($id, [
+            'email' => $email,
+            'password' => $password
+        ]);
     }
 
-    public function delete(string $id)
+    public function destroy(string $id)
     {
-        return $this->repository->delete($id);
+        return $this->repository->destroy($id);
     }
 }
