@@ -23,12 +23,12 @@ class UserService
         ]);
     }
 
-    public function update(string $id, string $email, string $password)
+    public function update(string $id, ?string $email = null, ?string $password = null)
     {
-        return $this->repository->update($id, [
+        return $this->repository->update($id, array_filter([
             'email' => $email,
-            'password' => $password
-        ]);
+            'password' => bcrypt($password),
+        ]));
     }
 
     public function destroy(string $id)
