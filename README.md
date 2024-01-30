@@ -4,7 +4,7 @@
 
 Projeto de uma API de gerenciamento de carros, feito com Laravel 10 e MySQL.
 
-- [Documentação da API](https://www.postman.com/universal-robot-168801/workspace/car-management/overview).
+- [Documentação da API](https://www.postman.com/universal-robot-168801/workspace/car-management/overview)
 
 ## Instalação e configuração
 
