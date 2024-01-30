@@ -26,3 +26,19 @@ test('deletes a user', function () {
     $service = new UserService($repository);
     $service->destroy(fake()->uuid());
 });
+
+test('attaches a car', function () {
+    $repository = Mockery::mock(UserRepositoryInterface::class);
+    $repository->shouldReceive('attachCar')->once();
+
+    $service = new UserService($repository);
+    $service->addCar(fake()->uuid(), fake()->uuid());
+});
+
+test('dataches a car', function () {
+    $repository = Mockery::mock(UserRepositoryInterface::class);
+    $repository->shouldReceive('detachCar')->once();
+
+    $service = new UserService($repository);
+    $service->removeCar(fake()->uuid(), fake()->uuid());
+});
