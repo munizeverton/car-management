@@ -1,7 +1,42 @@
 <?php
 
-it('returns a successful response', function () {
-    $response = $this->get('/');
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-    $response->assertStatus(200);
+uses(RefreshDatabase::class);
+
+it('creates a user and returns a successful response and the created resource', function () {
+    $name = fake()->name();
+    $email = fake()->email();
+
+    $response = $this->post('/api/users', [
+        'name' => $name,
+        'email' => $email,
+        'password' => fake()->password(),
+    ]);
+
+    $response->assertStatus(201);
+
+    $response->assertJsonFragment([
+        'name' => $name,
+        'email' => $email,
+    ]);
+});
+
+it('does not create a user without the required fields', function () {
+    $response = $this->post('/api/users');
+
+    $response->assertStatus(302);
+});
+
+it('does not create a user with duplicated email', function () {
+    $user = User::factory()->create();
+
+    $response = $this->post('/api/users', [
+        'name' => fake()->name(),
+        'email' => $user->email,
+        'password' => fake()->password(),
+    ]);
+
+    $response->assertStatus(302);
 });
