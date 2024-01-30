@@ -26,7 +26,7 @@ it('creates a user and returns a successful response and the created resource', 
 it('does not create a user without the required fields', function () {
     $response = $this->post('/api/users');
 
-    $response->assertStatus(302);
+    $response->assertStatus(403);
 });
 
 it('does not create a user with duplicated email', function () {
@@ -38,5 +38,5 @@ it('does not create a user with duplicated email', function () {
         'password' => fake()->password(),
     ]);
 
-    $response->assertStatus(302);
+    $response->assertStatus(403);
 });

@@ -27,7 +27,7 @@ class UserService
     {
         return $this->repository->update($id, array_filter([
             'email' => $email,
-            'password' => bcrypt($password),
+            'password' => $password,
         ]));
     }
 

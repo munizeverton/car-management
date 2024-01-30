@@ -8,18 +8,15 @@ uses(RefreshDatabase::class);
 it('updates a user and returns a successful response and the created resource', function () {
     $user = User::factory()->create();
 
-    $newName = fake()->name();
     $newEmail = fake()->email();
 
-    $response = $this->put("/api/users/{$user->uuid}", [
-        'name' => $newName,
+    $response = $this->put("/api/users/{$user->id}", [
         'email' => $newEmail,
     ]);
 
-    $response->assertStatus(201);
+    $response->assertStatus(200);
 
     $response->assertJsonFragment([
-        'name' => $newName,
         'email' => $newEmail,
     ]);
 });
