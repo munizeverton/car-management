@@ -1,8 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "munizeverton/car-management",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Car Management API",
     "license": "MIT",
     "require": {
         "php": "^8.1",

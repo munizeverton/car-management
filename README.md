@@ -30,6 +30,12 @@ Instale as dependências do projeto
 composer install
 ```
 
+Gere uma chave para a aplicação
+
+```bash
+php artisan key:generate
+```
+
 Rode as migrations para criar as tabelas do banco de dados
 
 ```bash
