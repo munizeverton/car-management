@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-it('creates a user and returns a successful response and the created resource', function () {
+it('creates a user returns a successful response and the created resource', function () {
     $name = fake()->name();
     $email = fake()->email();
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 
 class UserService
@@ -14,7 +15,7 @@ class UserService
         $this->repository = $repository;
     }
 
-    public function store(string $name, string $email, string $password)
+    public function store(string $name, string $email, string $password): User
     {
         return $this->repository->store([
             'name' => $name,
@@ -23,7 +24,7 @@ class UserService
         ]);
     }
 
-    public function update(string $id, ?string $email = null, ?string $password = null)
+    public function update(string $id, ?string $email = null, ?string $password = null): User
     {
         return $this->repository->update($id, array_filter([
             'email' => $email,
@@ -31,8 +32,8 @@ class UserService
         ]));
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): void
     {
-        return $this->repository->destroy($id);
+        $this->repository->destroy($id);
     }
 }
