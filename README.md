@@ -1,4 +1,4 @@
-![Testes](https://github.com/munizeverton/car-management/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/munizeverton/car-management/actions/workflows/tests.yml/badge.svg)
 
 ## Car Management
 
