@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\CarResource;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -39,6 +40,13 @@ class UserController extends Controller
         app()->make(UserService::class)->destroy($id);
 
         return response()->noContent();
+    }
+
+    public function listCars(string $id)
+    {
+        $cars = app()->make(UserService::class)->listCars($id);
+
+        return CarResource::collection($cars);
     }
 
     public function addCar(string $userId, string $carId): Response

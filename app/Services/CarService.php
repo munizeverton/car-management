@@ -29,8 +29,9 @@ class CarService
         return $this->repository->update($id, array_filter($data));
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): void
     {
-        return $this->repository->destroy($id);
+        $this->repository->detachAllUsers($id);
+        $this->repository->destroy($id);
     }
 }

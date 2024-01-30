@@ -29,6 +29,7 @@ test('updates a car', function () {
 
 test('deletes a car', function () {
     $repository = Mockery::mock(CarRepositoryInterface::class);
+    $repository->shouldReceive('detachAllUsers')->once();
     $repository->shouldReceive('destroy')->once();
 
     $service = new CarService($repository);

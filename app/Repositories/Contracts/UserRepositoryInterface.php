@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface UserRepositoryInterface
 {
@@ -16,7 +17,11 @@ interface UserRepositoryInterface
 
     public function destroy(string $id);
 
+    public function listCars(string $id): LengthAwarePaginator;
+
     public function attachCar(string $userId, string $carId): void;
 
     public function detachCar(string $userId, string $carId): void;
+
+    public function detachAllCars(string $id): void;
 }

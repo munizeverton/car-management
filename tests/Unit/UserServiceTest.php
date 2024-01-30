@@ -21,6 +21,7 @@ test('updates a user', function () {
 
 test('deletes a user', function () {
     $repository = Mockery::mock(UserRepositoryInterface::class);
+    $repository->shouldReceive('detachAllCars')->once();
     $repository->shouldReceive('destroy')->once();
 
     $service = new UserService($repository);

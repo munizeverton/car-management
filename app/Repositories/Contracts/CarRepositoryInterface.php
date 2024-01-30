@@ -19,4 +19,6 @@ interface CarRepositoryInterface
     public function update(string $id, array $data): Car;
 
     public function destroy(string $id): void;
+
+    public function detachAllUsers(string $id): void;
 }

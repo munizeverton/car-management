@@ -21,6 +21,6 @@ it('detaches a car to a user and checks the database', function () {
 
     $this->delete("/api/users/{$user->id}/car/{$car->id}");
 
-    expect($user->cars->first())->toBe(null);
+    expect($user->cars->first())->toBeEmpty();
 });
 

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -35,6 +36,11 @@ class UserRepository implements UserRepositoryInterface
         User::findOrFail($id)->delete();
     }
 
+    public function listCars(string $id, int $perPage = 15): LengthAwarePaginator
+    {
+        return User::findOrFail($id)->cars()->paginate($perPage);
+    }
+
     public function attachCar(string $userId, string $carId): void
     {
         User::findOrFail($userId)->cars()->syncWithoutDetaching(
@@ -47,5 +53,10 @@ class UserRepository implements UserRepositoryInterface
         User::findOrFail($userId)
             ->cars()
             ->updateExistingPivot($carId, ['deleted_at' => now()]);
+    }
+
+    public function detachAllCars(string $id): void
+    {
+        User::findOrFail($id)->cars()->update(['car_user.deleted_at' => now()]);
     }
 }

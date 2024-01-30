@@ -41,4 +41,9 @@ class CarRepository implements CarRepositoryInterface
     {
         Car::findOrFail($id)->delete();
     }
+
+    public function detachAllUsers(string $id): void
+    {
+        Car::findOrFail($id)->users()->update(['car_user.deleted_at' => now()]);
+    }
 }

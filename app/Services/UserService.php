@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UserService
 {
@@ -34,7 +35,13 @@ class UserService
 
     public function destroy(string $id): void
     {
+        $this->repository->detachAllCars($id);
         $this->repository->destroy($id);
+    }
+
+    public function listCars(string $id, int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->repository->listCars($id, $perPage);
     }
 
     public function addCar(string $userId, string $carId): void
