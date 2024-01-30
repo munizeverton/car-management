@@ -18,10 +18,10 @@ class CarFactory extends Factory
     {
         return [
             'license_plate' => fake()->unique()->bothify('???-####'),
-            'brand' => fake()->word,
-            'model' => fake()->word,
-            'color' => fake()->colorName,
-            'year' => fake()->year,
+            'brand' => fake()->word(),
+            'model' => fake()->word(),
+            'color' => fake()->colorName(),
+            'year' => fake()->year(),
         ];
     }
 }

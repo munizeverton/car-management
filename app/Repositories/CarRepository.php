@@ -4,12 +4,19 @@ namespace App\Repositories;
 
 use App\Models\Car;
 use App\Repositories\Contracts\CarRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class CarRepository implements CarRepositoryInterface
 {
-    public function getAll()
+    public function getAll(): Collection
     {
-        return Car::paginate();
+        return Car::all();
+    }
+
+    public function getAllPaginated(int $perPage = 15): LengthAwarePaginator
+    {
+        return Car::paginate($perPage);
     }
 
     public function getById(string $id): Car
@@ -17,17 +24,20 @@ class CarRepository implements CarRepositoryInterface
         return Car::findOrFail($id);
     }
 
-    public function create(array $data): Car
+    public function store(array $data): Car
     {
         return Car::create($data);
     }
 
     public function update(string $id, array $data): Car
     {
-        return Car::findOrFail($id)->update($data);
+        $car = Car::findOrFail($id);
+        $car->update($data);
+
+        return $car;
     }
 
-    public function delete(string $id)
+    public function destroy(string $id): void
     {
         Car::findOrFail($id)->delete();
     }
