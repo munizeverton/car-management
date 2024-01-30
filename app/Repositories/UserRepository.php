@@ -34,4 +34,18 @@ class UserRepository implements UserRepositoryInterface
     {
         User::findOrFail($id)->delete();
     }
+
+    public function attachCar(string $userId, string $carId): void
+    {
+        User::findOrFail($userId)->cars()->syncWithoutDetaching(
+            [$carId => ['deleted_at' => null]]
+        );
+    }
+
+    public function detachCar(string $userId, string $carId): void
+    {
+        User::findOrFail($userId)
+            ->cars()
+            ->updateExistingPivot($carId, ['deleted_at' => now()]);
+    }
 }

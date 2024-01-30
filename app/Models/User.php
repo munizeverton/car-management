@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,5 +52,12 @@ class User extends Authenticatable
     protected static function booted(): void
     {
         static::creating(static fn(User $user) => $user->id = (string)Str::uuid());
+    }
+
+    public function cars(): BelongsToMany
+    {
+        return $this->belongsToMany(Car::class)
+            ->whereNull('car_user.deleted_at')
+            ->withTimestamps();
     }
 }

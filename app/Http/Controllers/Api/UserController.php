@@ -7,10 +7,12 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): JsonResource
     {
         $user = app()->make(UserService::class)->store(
             $request->input('name'),
@@ -21,7 +23,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(UpdateUserRequest $request, string $id)
+    public function update(UpdateUserRequest $request, string $id): JsonResource
     {
         $user = app()->make(UserService::class)->update(
             $id,
@@ -32,10 +34,24 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
         app()->make(UserService::class)->destroy($id);
 
         return response()->noContent();
+    }
+
+    public function addCar(string $userId, string $carId): Response
+    {
+        app()->make(UserService::class)->addCar($userId, $carId);
+
+        return response([], 201);
+    }
+
+    public function removeCar(string $userId, string $carId): Response
+    {
+        app()->make(UserService::class)->removeCar($userId, $carId);
+
+        return response([], 201);
     }
 }

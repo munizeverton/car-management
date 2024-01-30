@@ -36,4 +36,14 @@ class UserService
     {
         $this->repository->destroy($id);
     }
+
+    public function addCar(string $userId, string $carId): void
+    {
+        $this->repository->attachCar($userId, $carId);
+    }
+
+    public function removeCar(string $userId, string $carId): void
+    {
+        $this->repository->detachCar($userId, $carId);
+    }
 }

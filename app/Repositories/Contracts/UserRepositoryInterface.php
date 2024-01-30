@@ -15,4 +15,8 @@ interface UserRepositoryInterface
     public function update(string $id, array $data): User;
 
     public function destroy(string $id);
+
+    public function attachCar(string $userId, string $carId): void;
+
+    public function detachCar(string $userId, string $carId): void;
 }
